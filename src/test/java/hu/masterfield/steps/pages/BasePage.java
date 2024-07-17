@@ -1,21 +1,37 @@
-/* Selenium Webdriver elindítása */
-@BeforeAll
-public static void setup() {
-    // set chrome options
-    ChromeOptions chromeOptions = new ChromeOptions();
-    chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
+package hu.masterfield.steps.pages;
 
-    // init driver
-    driver = new ChromeDriver(chromeOptions);
-    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-    driver.manage().window().setSize(new Dimension(900, 900));
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+public class BasePage {
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
+
+    public BasePage(WebDriver driver) {
+        BasePage.driver = driver;
+        BasePage.wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+
+        PageFactory.initElements(driver, this);
+    }
+
+    public boolean isLoaded(WebElement element) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+        } catch (TimeoutException e) {
+            fail (e);
+            return false;
+        }
+    }
+
+    public boolean isInteractable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
+    }
 }
-
-@AfterAll
-public static void cleanup() {
-    driver.quit();
-}
-protected static WebDriver driver;
-
-protected static WebDriverWait wait;
