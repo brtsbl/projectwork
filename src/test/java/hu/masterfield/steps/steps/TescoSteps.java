@@ -1,4 +1,6 @@
 package hu.masterfield.steps.steps;
+import hu.masterfield.steps.pages.HomePage;
+import hu.masterfield.steps.pages.SearchResultPage;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
@@ -17,7 +19,8 @@ public class TescoSteps {
     protected static WebDriver driver;
 
     protected static WebDriverWait wait;
-
+    private HomePage homePage;
+    private SearchResultPage searchResultPage;
 @BeforeAll
 public static void setup() {
     // set chrome options
@@ -38,18 +41,22 @@ public static void cleanup() {
 
     @Given("I open the home page")
     public void iOpenTheHomePage() {
+        driver.get("https://bevasarlas.tesco.hu/groceries/hu-HU ");
+        homePage = new HomePage(driver);
+        homePage.isLoaded();
     }
 
     @When("I search for {string}")
-    public void iSearchFor(String arg0) {
+    public void iSearchFor(String productName) {searchResultPage = homePage.search(productName);
     }
 
     @Then("{string} product\\(s) is\\/are displayed")
-    public void productSIsAreDisplayed(String arg0) {
+    public void productSIsAreDisplayed(int numberOfProducts) {
+        searchResultPage.validateSearchResultNumber(numberOfProducts)
     }
 
     @And("the product's name contains {string}")
-    public void theProductSNameContains(String arg0) {
+    public void theProductSNameContains(String searchWord) {
     }
 
     @And("header contains the word {string}")
