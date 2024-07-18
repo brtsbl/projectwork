@@ -50,10 +50,10 @@ public static void cleanup() {
     public void iSearchFor(String productName) {searchResultPage = homePage.search(productName);
     }
 
-    @Then("{string} product\\(s) is\\/are displayed")
-    public void productSIsAreDisplayed(int numberOfProducts) {
-        searchResultPage.validateSearchResultNumber(numberOfProducts)
-    }
+     @Then("{int} products are displayed")
+    public void productSAreDisplayed(int numberOfProducts) {
+        searchResultPage.validateSearchResultNumber(numberOfProducts);
+     }
 
     @And("the product's name contains {string}")
     public void theProductSNameContains(String searchWord) {
@@ -74,5 +74,6 @@ public static void cleanup() {
     @And("{string} button is available")
     public void buttonIsAvailable(String arg0) {
     }
+
 
 }

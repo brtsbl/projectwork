@@ -5,9 +5,18 @@ Feature: Specific products can be found using the "Search" function on the page
     Background:
       Given I open the home page
 
+    Scenario: Search for existing product
+      When  I search for "papagáj"
+      Then 2 products are displayed
+    // And the product's name contains "papagáj"
+    //  And header contains the word "papagáj"
+
+
+
+
     Scenario Outline: Search for existing products
       When  I search for "<productName>"
-      Then "<numberOfProducts>" product(s) is/are displayed
+      Then "<numberOfProducts>" products are displayed
       And the product's name contains "<productName>"
       And header contains the word "<productName>"
 
