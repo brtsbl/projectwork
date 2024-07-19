@@ -3,6 +3,7 @@ import hu.masterfield.steps.pages.HomePage;
 import hu.masterfield.steps.pages.SearchResultPage;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -62,18 +63,22 @@ public static void cleanup() {
 
     @And("header contains the word {string}")
     public void headerContainsTheWord(String arg0) {
+    throw new PendingException();
     }
 
     @Then("nothing changes on the page")
     public void nothingChangesOnThePage() {
+        throw new PendingException();
     }
 
     @Then("a message displayed that the search didn't find relevant products")
     public void aMessageDisplayedThatTheSearchDidnTFindRelevantProducts() {
+        throw new PendingException();
     }
 
     @And("{string} button is available")
     public void buttonIsAvailable(String arg0) {
+        throw new PendingException();
     }
 
 
