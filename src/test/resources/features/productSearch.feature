@@ -8,7 +8,7 @@ Feature: Specific products can be found using the "Search" function on the page
     Scenario: Search for existing product
       When  I search for "papagáj"
       Then 2 products are displayed
-    # And the product's name contains "papagáj"
+      And the product's name contains "papagáj"
     #  And header contains the word "papagáj"
 
 

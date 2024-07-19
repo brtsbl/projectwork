@@ -56,7 +56,8 @@ public static void cleanup() {
      }
 
     @And("the product's name contains {string}")
-    public void theProductSNameContains(String searchWord) {
+    public void theProductSNameContains(String product) {
+    searchResultPage.searchProduct(product);
     }
 
     @And("header contains the word {string}")
